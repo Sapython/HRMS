@@ -1,7 +1,7 @@
 # HRMS-Software
 HRMS software solution to manage HR and event organisation for office and buisness related work.
 
-<img src="https://raw.githubusercontent.com/swayambhu-innovations/HRMS-Software/master/src/assets/vectors/undraw_Online_calendar_re_wk3t(1).png?token=AK4TR5I7LZPKYHQTYTLBD53AXIX7K" width="500">
+<img src="https://raw.githubusercontent.com/swayambhu-innovations/HRMS-Software/master/src/assets/vectors/undraw_Online_calendar_re_wk3t(1).png" width="500">
 
 
 ## Getting Started
