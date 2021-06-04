@@ -1,16 +1,72 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { AppComponent } from './app.component';
+import { BiometricsComponent } from './biometrics/biometrics.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HolidayCalendarComponent } from './holiday-calendar/holiday-calendar.component';
+import { HomeComponent } from './home/home.component';
+import { LeaveComponent } from './leave/leave.component';
+import { LoginComponent } from './login/login.component';
+import { PayrollComponent } from './payroll/payroll.component';
+import { SettingsComponent } from './settings/settings.component';
+import { SignupComponent } from './signup/signup.component';
+import { TimeSheetComponent } from './time-sheet/time-sheet.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { LoginGuard } from './guards/login-guard.guard'
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'Dashboard/Home',
     pathMatch: 'full'
   },
+  { path:"Dashboard",
+    component:DashboardComponent,
+    canActivate:[LoginGuard],
+    data: { authGuardPipe: redirectLoggedInTo(['/Login']), "route":"checkout" },
+    children:[
+      {
+        path: 'Home',
+        component:HomeComponent,
+      },
+      {
+        path: 'Leave',
+        component:LeaveComponent,
+      },
+      {
+        path: 'Biometrics',
+        component:BiometricsComponent,
+      },
+      {
+        path: 'Timesheet',
+        component:TimeSheetComponent,
+      },
+      {
+        path: 'Calendar',
+        component:HolidayCalendarComponent,
+      },
+      {
+        path: 'Payroll',
+        component:PayrollComponent,
+      },
+      {
+        path: 'Settings',
+        component:SettingsComponent,
+      },
+    ]
+  },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  }
+    path:"Login",
+    component:LoginComponent,
+  },
+  {
+    path:"SignUp",
+    component:SignupComponent,
+  },
+  {
+    path:"verifyEmail",
+    component:VerifyEmailComponent,
+  },
 ];
 
 @NgModule({

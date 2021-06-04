@@ -1,0 +1,158 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Leave</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-label>
+    <h1>See all leave and requests.</h1>
+  </ion-label>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            Total leave granted
+          </ion-card-header>
+          <ion-card-content>
+            <ion-progress-bar value="0.25" color="success"></ion-progress-bar>
+            <ion-label>Out of 50 days/month</ion-label>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+          <div style="display: block;padding:20px 20px;">
+            <canvas baseChart id="timingChart" width="400" height="145" [legend]="false" [datasets]="lineChartData"
+              [labels]="lineChartLabels" [colors]="lineChartColors" [chartType]="'line'">
+            </canvas>
+          </div>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card id="topLeaves">
+          <ion-card-header>
+            Latest leaves
+          </ion-card-header>
+          <ion-card-content>
+            <table class="uk-table">
+              <tr>
+                <th class="uk-text-center">Person</th>
+                <th class="uk-text-center">Total Leave Taken</th>
+                <th class="uk-text-center">Leftover Leaves</th>
+              </tr>
+              <tr *ngFor="let topLeave of totalLeave">
+                <td class="uk-text-center">
+                  <ion-item>
+                    <ion-avatar>
+                      <img src="https://i.pravatar.cc/300" alt="Person">
+                    </ion-avatar>
+                    <ion-label>&nbsp;&nbsp;&nbsp; {{topLeave.name}}</ion-label>
+                  </ion-item>
+                </td>
+                <td class="uk-text-center">
+                  <ion-label>
+                    {{topLeave.leaveTaken}}
+                  </ion-label>
+                </td>
+                <td class="uk-text-center">
+                  <ion-label>{{topLeave.leftLeave}}</ion-label>
+                </td>
+              </tr>
+            </table>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card id="leaveRequest">
+          <ion-row class="uk-flex-between">
+            <ion-col class="uk-width-expand">
+              <ion-label class="txt2">
+                Leave Requests
+              </ion-label>
+            </ion-col>
+            <ion-buttons style="width:min-content;">
+              <ion-button (click)="toggleInterviewData('today')" id="interviewToday">
+                <ion-label>
+                  Today
+                </ion-label>
+              </ion-button>
+              <ion-button (click)="toggleInterviewData('yesterday')" id="interviewYesterday">
+                <ion-label>
+                  Yesterday
+                </ion-label>
+              </ion-button>
+              <ion-button (click)="toggleInterviewData('all')" id="interviewYesterday">
+                <ion-label>
+                  All
+                </ion-label>
+              </ion-button>
+            </ion-buttons>
+          </ion-row>
+          <table class="uk-table" *ngIf="interviews.length>0">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Branch</th>
+                <th>Post</th>
+                <th>Total Leave Day</th>
+                <th>Request Day</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let interviewData of interviews">
+                <td>
+                  <ion-label>{{interviewData.employee}}</ion-label>
+                </td>
+                <td>
+                  <ion-label>
+                    <ion-badge *ngIf="interviewData.branch=='Web Developer'" color="primary">
+                      {{interviewData.branch}}
+                    </ion-badge>
+                    <ion-badge *ngIf="interviewData.branch=='Android Developer'" color="success">
+                      {{interviewData.branch}}
+                    </ion-badge>
+                    <ion-badge *ngIf="interviewData.branch=='Designer'" color="warning">
+                      {{interviewData.branch}}
+                    </ion-badge>
+                    <ion-badge *ngIf="interviewData.branch=='Marketing'" color="tertiary">
+                      {{interviewData.branch}}
+                    </ion-badge>
+                  </ion-label>
+                </td>
+                <td>{{interviewData.post}}</td>
+                <td>
+                  <ion-label>{{interviewData.totalLeaveDay}}&nbsp;days</ion-label>
+                </td>
+                <td>
+                  <ion-label>{{interviewData.dateTime}}</ion-label>
+                </td>
+                <td>
+                  <ion-button color="success">
+                    <ion-label>Accept</ion-label>
+                  </ion-button>
+                  <ion-button color="danger">
+                    <ion-label>Reject</ion-label>
+                  </ion-button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="interviews.length<=0">
+            <div class="uk-align-center">
+              <img src="/assets/broke.png" alt="Nothing Found" class="nothingFound uk-align-center">
+              <p *ngIf="!interviewFilter" class="txt3 uk-text-center">Nothing found please create a <a
+                  href="#interview"> new interview</a></p>
+              <p *ngIf="interviewFilter" class="txt3 uk-text-center">Nothing found in this filter please <a
+                  (click)="toggleInterviewData('all')"> clear filter </a> to see all.</p>
+            </div>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

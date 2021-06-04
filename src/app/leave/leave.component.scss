@@ -1,0 +1,29 @@
+ion-content{
+    --padding-top:20px;
+    --padding-start:20px;
+    --padding-end:20px;
+    --padding-bottom: 20px;
+}
+table:nth-of-type(even){
+    background:var(--ion-color-light-shade);
+}
+tr{
+    border-top: 1px var(--ion-color-light) solid;
+}
+th{
+    position: sticky;
+}
+ion-card{
+    padding: 10px 10px;
+}
+#topLeaves{
+    height:400px;
+    overflow-y: auto;
+}
+#leaveRequest{
+    max-height:600px;
+    overflow-y: auto;
+}
+
+
+

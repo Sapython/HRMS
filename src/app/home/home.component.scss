@@ -1,0 +1,54 @@
+#container{
+    padding:30px 30px;
+    font-size: x-large;
+}
+.subtext{
+    font-size: medium;
+}
+#date{
+    font-size:medium;
+}
+#payrollMeta{
+    height:auto;
+    padding:20px 30px; 
+}
+.sideDivider{
+    border-right: 2px solid var(--ion-color-light);
+    margin-right: 20px;
+}
+ion-list{
+    background:transparent;
+}
+ion-card{
+    padding: 10px 10px;
+}
+ion-progress-bar{
+    height:10px;
+    border-radius: 10px;
+}
+.attendance{
+    height:330px;
+    overflow-y: auto;
+}
+ion-radio{
+    --color:transparent;
+    --color-checked: transparent;
+}
+ion-badge{
+    padding:8px 10px;
+}
+td{
+    border-top: 1px var(--ion-color-light-tint) solid;
+}
+.nothingFound{
+    width:200px;
+    height:auto;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+<ion-content>
+  <ion-card>
+    <ion-label><h1 class="uk-text-center">Login Now</h1></ion-label>
+    <form>
+      <ion-input 
+      type="text" 
+      autocomplete="username" 
+      autofocus 
+      placeholder="Email Address" 
+      inputmode="text"
+      required
+      #email
+      ></ion-input>
+      <ion-input 
+      type="password" 
+      autocomplete="password" 
+      placeholder="Password" 
+      inputmode="text"
+      required
+      #password
+      ></ion-input>
+    </form>
+    <br>
+    <ion-button (click)="authService.SignIn(email.value.toString(),password.value.toString())" shape="round" color="success">
+      <ion-icon name="log-in-outline" size="large"></ion-icon>&nbsp;Login
+    </ion-button>
+    <br>
+    <ion-button shape="round">
+      Login with &nbsp;<ion-icon name="logo-google" size="large"></ion-icon> &nbsp;Google
+    </ion-button>
+    <br>
+    <a href="/SignUp" class="uk-text-center uk-align-center"><ion-label color="primary">If you don't have account register now.</ion-label></a>
+  </ion-card>
+</ion-content>

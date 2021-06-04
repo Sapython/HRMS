@@ -24,3 +24,77 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+.uk-alert{
+    background: var(--ion-color-light);
+}
+.txt1{
+    font-size: xx-large;
+}
+.txt2{
+    font-size: x-large;
+}
+.txt3{
+    font-size:larger;
+}
+.txt4{
+    font-size:large;
+}
+.txt5{
+    font-size:medium;
+}
+.txt6{
+    font-size: small;
+}
+.txt7{
+    font-size:smaller;
+}
+.primary{
+    color:var(--ion-color-primary)
+}
+.secondary{
+    color:var(--ion-color-secondary)
+}
+.tertiary{
+    color:var(--ion-color-tertiary)
+}
+.success{
+    color:var(--ion-color-success)
+}
+.warning{
+    color:var(--ion-color-warning)
+}
+.danger{
+    color:var(--ion-color-danger)
+}
+.dark{
+    color:var(--ion-color-dark)
+}
+.medium{
+    color:var(--ion-color-medium)
+}
+.light{
+    color:var(--ion-color-light)
+}
+h1,h2,h3,h4,h5,h6,p,ion-label{
+    color:var(--ion-color-dark);
+}
+:root{
+    box-shadow: 5px 3px 10px rgba(0, 0, 0, 0.397);
+}
+.uk-close > svg{
+    fill:var(--ion-color-primary);
+    color:var(--ion-color-primary);
+    opacity: 1.0;
+    transition: all 0.5s ease-in-out;
+}
+.uk-close > svg:hover{
+    color:var(--ion-color-danger);
+    transform: scale(1.5);
+}
+.popover-content.sc-ion-popover-md{
+    width:400px;
+}
+// .popover-content.sc-ion-popover-md > app-messages > ion-list{
+//     overflow-y: auto;
+// }
+

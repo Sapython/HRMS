@@ -1,0 +1,37 @@
+@keyframes smallBig {
+    0%{
+        transform: scale(1);
+    }
+    49%{
+        transform:scale(0.9)
+    }
+    100%{
+        transform: scale(1)
+    }
+}
+ion-list{
+    background:transparent;
+    border:2px dotted var(--ion-color-light);
+    border-radius: 10px;
+    padding:10px 10px;
+}
+ion-list > ion-card{
+    min-height: 300px;
+    background: rgba(1, 1, 1, 0.082);
+}
+ion-card > div > ion-card{
+    padding:10px 10px;
+}
+.emptyListImage{
+    height:auto;
+    width:auto;
+    opacity: 0.3;
+    transform:scale(0.9);
+    animation: smallBig 2s infinite;
+}
+
+
+
+
+
+

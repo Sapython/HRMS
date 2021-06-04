@@ -1,0 +1,137 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Time Sheet</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary">
+      <ion-icon md="add-outline" ios="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="light">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light">
+        <ion-icon name="logo-google"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Time Sheet</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div id="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-list class="example-container">
+            <h2>To do</h2>
+            <ion-card
+              cdkDropList
+              #todoList="cdkDropList"
+              [cdkDropListData]="todo"
+              [cdkDropListConnectedTo]="[haveBugList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div *ngIf="todo.length!=0" >
+                <ion-card class="example-box" *ngFor="let item of todo" cdkDrag>
+                  <p class="txt3 primary" >{{item.name}}</p>
+                  <p class="txt6">{{item.description}}</p>
+                  <ion-chip color="{{mention.color}}" *ngFor="let mention of item.mentions">
+                    <ion-icon name="at-circle-outline"></ion-icon>
+                    <ion-label>{{mention.text.split('@').pop()}}</ion-label>
+                  </ion-chip>
+                </ion-card>
+              </div>
+              <img *ngIf="todo.length==0" src="assets\vectors\emptyList.png" class="emptyListImage" alt="Empty List">
+            </ion-card>
+          </ion-list>
+        </ion-col>
+        <ion-col>
+          <ion-list>
+            <h2>Have Bug</h2>
+            <ion-card
+              cdkDropList
+              #haveBugList="cdkDropList"
+              [cdkDropListData]="haveBug"
+              [cdkDropListConnectedTo]="[inreviewlist]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div *ngIf="haveBug.length!=0">
+                <ion-card class="example-box" *ngFor="let item of haveBug" cdkDrag>
+                  <p class="txt3 danger" >{{item.name}}</p>
+                  <p class="txt6">{{item.description}}</p>
+                  <ion-chip color="{{mention.color}}" *ngFor="let mention of item.mentions">
+                    <ion-icon name="at-circle-outline"></ion-icon>
+                    <ion-label>{{mention.text.split('@').pop()}}</ion-label>
+                  </ion-chip>
+                </ion-card>
+              </div>
+              <img *ngIf="haveBug.length==0" src="assets\vectors\undraw_bug_fixing_oc7a.png" class="emptyListImage" alt="Empty List">
+            </ion-card>
+          </ion-list>
+        </ion-col>
+        <ion-col>
+          <ion-list>
+            <h2>In Review</h2>
+            <ion-card
+              cdkDropList
+              #inreviewlist="cdkDropList"
+              [cdkDropListData]="inReview"
+              [cdkDropListConnectedTo]="[doneList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div *ngIf="inReview.length!=0">
+                <ion-card class="example-box" *ngFor="let item of inReview" cdkDrag>
+                  <p class="txt3 warning" >{{item.name}}</p>
+                  <p class="txt6">{{item.description}}</p>
+                  <ion-chip color="{{mention.color}}" *ngFor="let mention of item.mentions">
+                    <ion-icon name="at-circle-outline"></ion-icon>
+                    <ion-label>{{mention.text.split('@').pop()}}</ion-label>
+                  </ion-chip>
+                </ion-card>
+              </div>
+              <img *ngIf="inReview.length==0" src="assets\vectors\undraw_customer_survey_f9ur.png" class="emptyListImage" alt="Empty List">
+            </ion-card>
+          </ion-list>
+        </ion-col>
+        <ion-col>
+          <ion-list>
+            <h2>Done</h2>
+            <ion-card
+              cdkDropList
+              #doneList="cdkDropList"
+              [cdkDropListData]="done"
+              [cdkDropListConnectedTo]="[todoList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div *ngIf="done.length!=0">
+                <ion-card class="example-box" *ngFor="let item of done" cdkDrag>
+                  <p class="txt3 success" >{{item.name}}</p>
+                  <p class="txt6">{{item.description}}</p>
+                  <ion-chip color="{{mention.color}}" *ngFor="let mention of item.mentions">
+                    <ion-icon name="at-circle-outline"></ion-icon>
+                    <ion-label>{{mention.text.split('@').pop()}}</ion-label>
+                  </ion-chip>
+                </ion-card>
+              </div>
+              <img *ngIf="done.length==0" src="assets\vectors\undraw_Checklist__re_2w7v.png" class="emptyListImage" alt="Empty List">
+            </ion-card>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

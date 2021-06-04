@@ -1,0 +1,65 @@
+<ion-content>
+  <ion-card>
+    <ion-label><h1 class="uk-text-center">Signup Now</h1></ion-label>
+      <ion-avatar *ngIf="img1" class="uk-align-center">
+        <img [src]="img1" >
+      </ion-avatar>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" action="">
+        <ion-input 
+        type="file"
+        accept=".jpg,.png,.jpeg"
+        placeholder="Image" 
+        required
+        #photo
+        (change)="fileChange($event)"
+        formControlName="photo"
+        ></ion-input>
+        <ion-input 
+          type="text" 
+          autocomplete="name" 
+          autofocus 
+          placeholder="Full Name" 
+          inputmode="text"
+          required
+          formControlName="name"
+          #name
+        ></ion-input>
+        <ion-input 
+          type="text" 
+          autocomplete="username" 
+          placeholder="Email Address" 
+          inputmode="text"
+          required
+          #email
+          formControlName="email"
+        ></ion-input>
+        <ion-input 
+          type="password" 
+          autocomplete="password" 
+          placeholder="Password" 
+          inputmode="text"
+          required
+          #password
+          formControlName="password"
+        ></ion-input>
+        <ion-input 
+          type="password" 
+          autocomplete="password" 
+          placeholder="Password" 
+          inputmode="text"
+          required
+          #confirmPassword
+          formControlName="confirmPassword"
+        ></ion-input>
+        <ion-button type="submit" [disabled]="isLoading || !form.valid"
+      [ngClass]="isLoading || !form.valid ? 'disabled' : ''" shape="round" color="success">
+        <ion-icon name="log-in-outline" size="large"></ion-icon>&nbsp;Sign Up
+        </ion-button>
+      </form>
+    <ion-label color="danger" *ngIf="dataProvider.verifyEmail">Please verify your email to continue</ion-label>
+    <ion-button shape="round" (click)="authService.GoogleAuth()">
+      Sign Up with &nbsp;<ion-icon name="logo-google" size="large"></ion-icon> &nbsp;Google
+    </ion-button>
+    <a href="/Login" class="uk-text-center uk-align-center"><ion-label color="primary">If you already have account login now.</ion-label></a>
+  </ion-card>
+</ion-content>
