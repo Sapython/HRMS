@@ -97,7 +97,7 @@
                   <p>Total 9 Hours with a break of 60 Minutes</p>
                   <hr>
                   <div style="display: block;">
-                    <canvas baseChart id="timingChart" width="400" height="100" [legend]="false"
+                    <canvas baseChart #timingChart width="400" height="100" [legend]="false"
                       [datasets]="lineChartData" [labels]="lineChartLabels" [colors]="lineChartColors"
                       [chartType]="'line'">
                     </canvas>

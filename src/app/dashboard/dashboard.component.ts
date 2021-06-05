@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
     { title: 'Payroll', url: '/Dashboard/Payroll', icon: 'cash' },
     { title: 'Settings', url: '/Dashboard/Settings', icon: 'cog' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  public labels = ['Family', 'Friends'];
   constructor(public authService:AuthService) { }
 
   ngOnInit() {}

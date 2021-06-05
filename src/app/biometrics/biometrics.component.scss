@@ -1,0 +1,30 @@
+ion-content{
+    --padding-top:20px;
+    --padding-start:20px;
+    --padding-end:20px;
+    --padding-bottom: 20px;
+}
+ion-badge{
+    padding:8px 10px;
+}
+td{
+    border-top: 1px var(--ion-color-light-tint) solid;
+}
+.nothingFound{
+    width:200px;
+    height:auto;
+}
+ion-card{
+    padding: 10px 10px;
+}
+.miniProgressChart{
+    width:100px !important;
+    height:60px !important;
+}
+.miniFont{
+    font-size: 12px;
+}
+ion-note{
+    margin-left: 5px;
+    padding-left: 5px;
+}

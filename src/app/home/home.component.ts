@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { MessagesComponent } from '../messages/messages.component';
 import { NotificationComponent } from '../notification/notification.component';
@@ -10,7 +10,23 @@ import { Color, Label } from 'ng2-charts';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,AfterViewInit {
+  @ViewChild('timingChart') canvas:ElementRef;
+  ngAfterViewInit(){
+    console.log("Alpha: ",this.canvas)
+    if (this.canvas){
+      const gradient = this.canvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 150);
+      gradient.addColorStop(0, 'rgba(52, 213, 235,1)');
+      gradient.addColorStop(1, 'rgba(52, 213, 235,0.0)');
+      this.lineChartColors = [
+          {
+              backgroundColor: gradient
+          }
+      ];
+    } else {
+      console.log("ALpha: ",this.canvas);
+    }
+  }
   date: Date = new Date();
   public lineChartData: ChartDataSets[] = [
     { data: [9, 10, 10, 11, 12, 9, 10], label: 'Timings' },

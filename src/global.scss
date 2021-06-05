@@ -97,4 +97,22 @@ h1,h2,h3,h4,h5,h6,p,ion-label{
 // .popover-content.sc-ion-popover-md > app-messages > ion-list{
 //     overflow-y: auto;
 // }
+@media (prefers-color-scheme:dark){
+    .color-calendar.basic{
+        background:var(--ion-color-light);
+        box-shadow: var(--ion-color-light-tint);
+    }
+    .color-calendar.basic .calendar__monthyear{
+        color:var(--ion-color-dark)
+    }
+    .color-calendar.basic .calendar__weekdays .calendar__weekday{
+        color:var(--ion-color-dark)
+    }
+    .color-calendar.basic .calendar__arrow-inner::after{
+        background-color:var(--ion-color-dark)
+    }
+}
+
+
+
 
