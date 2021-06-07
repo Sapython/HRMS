@@ -26,8 +26,15 @@
             debounce="500"
             animated
             placeholder="Search Anything"
-            
+            id="search"
+            (ionChange)="autocomplete()"
             ></ion-searchbar>
+            <ion-list class="results" *ngIf="searchResultsFound">
+              <ion-item *ngFor="let result of searchResults" href="{{result.location}}">{{result.name}}</ion-item>
+            </ion-list>
+            <ion-list class="results" *ngIf="noSearchResultFound">
+              <ion-item>No search results found.</ion-item>
+            </ion-list>
           </ion-item>
           <ion-item *ngFor="let label of labels" lines="none">
             <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
