@@ -1,7 +1,14 @@
+* {
+    color: #000;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
 #wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
@@ -10,16 +17,60 @@
 
 h3, form {
     width: 90%;
+    margin: .5em 0;
 }
 
-.form-subitems {
-    display: flex;
-    align-items: center;
-    width: 100%;
+label {
+    font-weight: 700;
 }
 
-.form-subitem {
+#title, #description, #from, #to {
+    margin-top: .5em;
+    border: 1px solid #ccc;
+    padding: .5em;
+    border-radius: 10px;
+}
+
+#description {
+    resize: none;
+    height: 75px;
+}
+
+#from, #to {
+    text-align: center;
+}
+
+.form-item {
     display: flex;
     flex-direction: column;
     margin: 1em 0;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+#whole-day {
+    margin-right: .5em;
+}
+
+#times {
+    display: flex;
+}
+
+#times .form-item {
+    margin-right: 1em;
+}
+
+ion-button {
+    color: #fff;
+}
+
+.error {
+    border-color: red !important;
+}
+
+.hidden {
+    visibility: hidden;
 }
