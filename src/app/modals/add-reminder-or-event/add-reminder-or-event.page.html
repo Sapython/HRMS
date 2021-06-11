@@ -1,0 +1,26 @@
+<div id="wrapper">
+  <h3>Add a reminder/event for {{ month }} {{ date }}, {{ year }}</h3>
+  <form>
+    <div class="form-subitem">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title">
+    </div>
+    <div class="form-subitem">
+      <label for="description">Description</label>
+      <textarea name="description" id="description"></textarea>
+    </div>
+    <div class="form-subitem">
+      <input type="checkbox" name="whole-day" id="whole-day">
+      <label for="whole-day">Whole Day</label>
+    </div>
+    <div class="form-subitem">
+      <label for="from">From</label>
+      <input type="time" name="from" id="from">
+      <div class="form-subitem">
+        <label for="to">To</label>
+        <input type="time" name="to" id="from">
+      </div>
+    </div>
+    <ion-button type="submit" (click)="add()">Add!</ion-button>
+  </form>
+</div>

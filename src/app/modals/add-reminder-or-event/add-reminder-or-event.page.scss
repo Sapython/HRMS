@@ -1,0 +1,25 @@
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+}
+
+h3, form {
+    width: 90%;
+}
+
+.form-subitems {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.form-subitem {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0;
+}

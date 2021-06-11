@@ -66,7 +66,11 @@ const routes: Routes = [
   {
     path:"verifyEmail",
     component:VerifyEmailComponent,
+  },  {
+    path: 'add-reminder-or-event',
+    loadChildren: () => import('./modals/add-reminder-or-event/add-reminder-or-event.module').then( m => m.AddReminderOrEventPageModule)
   },
+
 ];
 
 @NgModule({

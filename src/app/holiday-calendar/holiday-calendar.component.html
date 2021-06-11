@@ -3,11 +3,82 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Holiday Calendar </ion-title>
+    <ion-title>Holiday Calendar</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div id="color-calendar">
+  <div id="wrapper">
+    <div id="month-year">
+      <ion-icon id="prev" name="chevron-back-outline"></ion-icon>
+      <h2>{{getMonthName()}} {{year}}</h2>
+      <ion-icon id="next" name="chevron-forward-outline"></ion-icon>
+    </div>
+
+    <ion-grid (click)="addReminder($event)">
+      <ion-row id="days">
+        <ion-col>Sun</ion-col>
+        <ion-col>Mon</ion-col>
+        <ion-col>Tue</ion-col>
+        <ion-col>Wed</ion-col>
+        <ion-col>Thu</ion-col>
+        <ion-col>Fri</ion-col>
+        <ion-col>Sat</ion-col>
+      </ion-row>
+      <ion-row id="week-1">
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row id="week-2">
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row id="week-3">
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row id="week-4">
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row id="week-5">
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row id="week-6">
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>
