@@ -1,0 +1,40 @@
+ion-card{
+    padding:20px 20px;
+}
+.one{
+    --cardColor1:#83EAF1;
+    --cardColor2:#63A4FF;
+    --textColor:black;
+}
+.two{
+    --cardColor1:#FFA69E;
+    --cardColor2:#861657;
+    --textColor:black;
+}
+.three{
+    --cardColor1:#380036;
+    --cardColor2:#0CBABA;
+    --textColor:white;
+}
+.four{
+    --cardColor1:#FB7BA2;
+    --cardColor2:#FCE043;
+    --textColor:black;
+}
+.featureCard{
+    border-radius: 20px;
+    background: linear-gradient(120deg,var(--cardColor1),var(--cardColor2));
+    width:auto;
+    padding: 20px 20px;
+    box-shadow: 0px 5px 4px rgba(1,1,1,0.5);
+}
+.featureCard > ion-card-header > ion-card-title {
+    color:var(--textColor);
+}
+.featureCard > ion-label{
+    color:var(--textColor)
+}
+.managerCard{
+    width: min-content;
+}
+

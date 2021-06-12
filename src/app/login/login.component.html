@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-card>
+  <ion-card [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
     <ion-label><h1 class="uk-text-center">Login Now</h1></ion-label>
     <form>
       <ion-input 
@@ -31,4 +31,7 @@
     <br>
     <a href="/SignUp" class="uk-text-center uk-align-center"><ion-label color="primary">If you don't have account register now.</ion-label></a>
   </ion-card>
+  <div id="overlay" *ngIf="dataProvider.showOverlay">
+    <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+  </div>
 </ion-content>

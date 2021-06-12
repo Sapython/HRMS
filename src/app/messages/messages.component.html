@@ -1,15 +1,18 @@
-<ion-list>  
-  <ion-list-header>  
-    <ion-label>Messages</ion-label>  
-  </ion-list-header>  
-  <ion-item class="text-10" *ngFor="let item of notifications">
-    <a class="uk-alert-close" uk-close></a>
-    <ion-avatar slot="start">
-      <img [src]="item.image" />
-    </ion-avatar>
-    <div>
-      <p id="title">{{item.title}}</p>
-      <p id="text">{{item.text}}</p>
-    </div>
-  </ion-item>  
-</ion-list>  
+<ion-card>
+  <ion-list>  
+    <ion-list-header>  
+      <ion-label>Messages</ion-label>  
+    </ion-list-header>  
+    <ion-item class="text-10" *ngFor="let item of notifications">
+      <a class="uk-alert-close" (click)="removeItem(item.id)" uk-close></a>
+      <ion-avatar slot="start">
+        <img [src]="item.image" />
+      </ion-avatar>
+      <div>
+        <p id="title">{{item.title}}{{item.id}}</p>
+        <p id="text">{{item.text}}</p>
+        <p><a href="./Dashboard/Notifications?open={{item.id}}">Read More</a></p>
+      </div>
+    </ion-item>  
+  </ion-list>
+</ion-card>

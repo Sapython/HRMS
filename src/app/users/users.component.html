@@ -1,0 +1,139 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Users</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-row>
+      <ion-col>
+        <ion-title class="primary txt1">Current Admins</ion-title>
+        <ion-list>
+          <ion-card *ngFor="let admin of admins">
+            <ion-avatar class=" uk-margin-medium-left">
+              <img [src]="admin.photo" />
+            </ion-avatar>
+            <ion-label class="success txt2 uk-margin-medium-left">
+              {{admin.name}}
+            </ion-label>
+            <br>
+            <ion-label class=" uk-margin-medium-left">{{admin.email}}</ion-label>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-buttons>
+          <ion-button color="warning" href="https://sapython.me/">
+            <ion-icon name="bug"></ion-icon>&nbsp;&nbsp;
+            Report Bug
+          </ion-button>
+          <ion-button color="secondary" href="https://sapython.me/">
+            <ion-icon name="help-buoy"></ion-icon>&nbsp;&nbsp;
+            Contact Support
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons>
+          <ion-button color="primary" href="https://sapython.me/">
+            <ion-icon name="code"></ion-icon>&nbsp;&nbsp;
+            Contact Developer
+          </ion-button>
+          <ion-button color="tertiary" href="https://swayambhu.tech/">
+            <ion-icon name="id-card"></ion-icon>&nbsp;&nbsp;
+            Contact Providers
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-row>
+          <ion-col>
+            <div class="featureCard one">
+              <ion-card-header>
+                <ion-card-title>Total Employees</ion-card-title>
+              </ion-card-header>
+              <ion-label class="txt1 success">{{totalEmployees}}</ion-label>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="featureCard two">
+              <ion-card-header>
+                <ion-card-title>Total Managers</ion-card-title>
+              </ion-card-header>
+              <ion-label class="txt1 success">{{totalManagers}}</ion-label>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="featureCard three">
+              <ion-card-header>
+                <ion-card-title>Total Admins</ion-card-title>
+              </ion-card-header>
+              <ion-label class="txt1 success">{{totalAdmins}}</ion-label>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="featureCard four">
+              <ion-card-header>
+                <ion-card-title>Unregistered Users</ion-card-title>
+              </ion-card-header>
+              <ion-label class="txt1 success">{{totalUnregistered}}</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-card>
+    <ion-grid>
+      <ion-row style="min-width: min-content;">
+        <ion-col *ngFor="let manager of managers">
+          <ion-card class="managerCard">
+            <ion-avatar>
+              <img [src]="manager.photo" style="width:64px;height:64px;" />
+            </ion-avatar>
+            <ion-label class="txt2">{{manager.name}}</ion-label>
+            <br>
+            <ion-label>{{manager.email}}</ion-label>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Employee List</ion-card-title>
+      <ion-card-subtitle>All the working employee</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let employee of employees">
+          <ion-avatar slot="start">
+            <img [src]="employee.photo" />
+          </ion-avatar>
+          <ion-label>{{employee.name}}</ion-label>
+          <ion-label>{{employee.post}}</ion-label>
+          <ion-label>First Login: {{employee.firstLogin}}</ion-label>
+          <ion-chip color="primary" *ngFor="let team of employee.teams">
+            <ion-icon name="at-circle-outline"></ion-icon>
+            <ion-label> {{team}}</ion-label>
+          </ion-chip>
+          <ion-buttons slot="end">
+            <ion-button fill="solid" color="success">
+              Make Manager
+            </ion-button>
+            <ion-button fill="solid" color="warning">
+              Restricate Employee
+            </ion-button>
+            <ion-button fill="solid" color="danger">
+              Request Removal
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -6,7 +6,6 @@
     <ion-title>Holiday Calendar</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <div id="wrapper">
     <div id="month-year">
@@ -14,7 +13,6 @@
       <h2>{{getMonthName()}} {{year}}</h2>
       <ion-icon id="next" name="chevron-forward-outline"></ion-icon>
     </div>
-
     <ion-grid (click)="addReminder($event)">
       <ion-row id="days">
         <ion-col>Sun</ion-col>

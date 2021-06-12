@@ -6,9 +6,10 @@ import { NavigationExtras, Router } from "@angular/router";
 import 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
+import 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { DataProvider } from '../providers/data.provider';
-import { User } from './user';
+import { User, access } from './DataStructures';
 import { ToastController } from '@ionic/angular';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { auditTime, filter, finalize, last, switchMap, take, tap } from 'rxjs/operators';
@@ -43,6 +44,7 @@ export class AuthService {
       }
     })
   }
+  public static dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' } as const;
   uploadFile(file,userName) {
     const filePath =userName.toString()+"."+file.name.split('.').pop().toString();
     console.log("Starting file upload",filePath)
@@ -57,7 +59,7 @@ export class AuthService {
   userFireDataReturn(){
     return this.userFireData;
   };
-  async presentToast(message) {
+  async presentToast(message,duration?) {
     const toast = await this.toastController.create({
       message: message,
       duration: 2000
@@ -65,14 +67,17 @@ export class AuthService {
     toast.present();
   }
   SignIn(email:string, password:string) {
+    this.homeDataProvider.showOverlay=true;
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result:any) => {
+        console.log(result)
         this.ngZone.run(() => {
-          this.presentToast("Sign In successful ")
+          this.presentToast("Sign In successful")
+          this.homeDataProvider.showOverlay=false;
         });
-        this.SetUserData(result.user);
+        this.router.navigate([""]);
       }).catch((error:any) => {
-        this.presentToast("An error occured "+error.toString())
+        this.presentToast("An error occured "+error.toString(),5000)
       })
   }
   // Sign up with email/password
@@ -87,6 +92,10 @@ export class AuthService {
         this.uploadFile(photo,result.user.uid).subscribe((imageUrl)=>{
           console.log("Completed the imageurl ",imageUrl)
           this.SetUserData(result.user,name,imageUrl);
+          let today = new Date();
+          var currentAccess:access={
+            accessLevel:'Unregistered',
+          }
           localStorage.setItem("localItem",JSON.stringify({
             uid:result.user.uid,
             email: result.user.email,
@@ -94,7 +103,11 @@ export class AuthService {
             photoURL: imageUrl,
             emailVerified: result.user.emailVerified,
             isAdmin:false,
-            data:[]
+            firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
+            data:result.user.data || [],
+            post:"Unregistered",
+            presentToday:this.formatPresentToday(true),
+            access:currentAccess,
           }))
           console.log("Completed the setUser data")
           this.router.navigate(['']);
@@ -134,6 +147,7 @@ export class AuthService {
   }
   get userId():string{
     let a = JSON.parse(localStorage.getItem('user') || '{}').uid;
+    this.afAuth.currentUser.finally().then((value)=>{a=value})
     return a;
   }
 
@@ -145,12 +159,14 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return (user !== null && user.email!== undefined) ? true : false;
   }
-  get isUserAdmin():boolean{
-    if(JSON.parse(localStorage.getItem('fireUser')|| '{}')==true){
-      return true;
-    }else{
-      return false;
-    }
+  isUserAdmin(){
+    console.log("IS admin fired",this.userId)
+    this.afs.collection("users").doc(this.userData.uid).valueChanges().toPromise().then(
+      (value)=>{
+        console.log(value)
+        console.log("--")
+      }
+    )
   }
 
   GoogleAuth() {
@@ -188,26 +204,31 @@ export class AuthService {
   AuthLogin(provider:any) {
     return this.afAuth.signInWithPopup(provider)
     .then((result:any) => {
-       this.ngZone.run(() => {
-        const queryParams: any = {};
-        queryParams.settings = JSON.stringify({"reloadRequired":true});
-        const navigationExtras: NavigationExtras = {
-          queryParams
-        };
-        // window.alert('You need to refresh the home page to load your profile.');
-        this.homeDataProvider.data={refresh:true};
-        this.router.navigate(['']);
-        })
       this.SetUserData(result.user);
       // window.alert("Auhtorisation successful ");
+      this.presentToast("Auhtorisation Successful")
+      this.router.navigate[""]
     }).catch((error:any) => {
       this.presentToast(error);
     })
   }
-
+  
+  formatPresentToday(val:boolean):string{
+    if (val){
+      let today  = new Date();
+      return "1-"+(today.toLocaleDateString("en-US",AuthService.dateOptions).toString())
+    }else{
+      let today  = new Date();
+      return "0-"+(today.toLocaleDateString("en-US",AuthService.dateOptions).toString())
+    }
+  }
   SetUserData(user:any,displayName?: string,photo?: string) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    console.log("SetUSerData",user,displayName,photo)
+    // console.log("SetUSerData",user,displayName,photo)
+    var currentAccess:access={
+      accessLevel:'Unregistered',
+    }
+    let today  = new Date();
     if (displayName!=undefined || photo!=undefined){
       console.log("Set data true")
       var userData: User = {
@@ -217,7 +238,11 @@ export class AuthService {
         photoURL: photo,
         emailVerified: user.emailVerified,
         isAdmin:false,
+        firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
         data:user.data || [],
+        post:"Unregistered",
+        presentToday:this.formatPresentToday(true),
+        access:currentAccess,
       }
     }else{
       console.log("Set data false")
@@ -228,10 +253,13 @@ export class AuthService {
         photoURL: user.photoURL,
         emailVerified: user.emailVerified,
         isAdmin:false,
-        data:user.data || []
+        firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
+        data:user.data || [],
+        post:"Unregistered",
+        presentToday:this.formatPresentToday(true),
+        access:currentAccess,
       }
     }
-    
     return userRef.set(userData, {
       merge: true
     })

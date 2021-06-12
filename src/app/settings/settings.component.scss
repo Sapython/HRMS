@@ -1,0 +1,24 @@
+ion-card{
+    height:80vh;
+    width:50vw;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+ion-card > ion-avatar{
+    width:150px;
+    height:150px;
+    margin-top: 50px;
+    left:50%;
+    position: relative;
+    transform: translateX(-50%);
+    box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.39);
+}
+
+
+
+
+
+
+

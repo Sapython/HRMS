@@ -1,3 +1,4 @@
+import { AllNotificationsComponent } from './all-notifications/all-notifications.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { LogoutComponent } from './logout/logout.component';
 import { SignupComponent } from './signup/signup.component';
@@ -31,6 +32,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage'
 import { LoginGuard } from './guards/login-guard.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { UsersComponent } from './users/users.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +50,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     LogoutComponent,
     DashboardComponent,
     VerifyEmailComponent,
+    UsersComponent,
+    AllNotificationsComponent
   ],
   entryComponents: [],
   imports: [

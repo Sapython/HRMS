@@ -1,0 +1,41 @@
+ion-card{
+    padding: 10px 10px;
+}
+.miniProgressChart{
+    width:100% !important;
+    height:200px !important;
+}
+td{
+    border-top: 1px var(--ion-color-light-tint) solid;
+}
+.getPremiuim{
+    // background-image: url("/assets/background/mountainRedTinted.jpg");
+    background-size: cover;
+    background-position: center;
+    height:200px;
+}
+.getPremiuim > ion-row > ion-col > div > ion-button{
+    border: 2px #E76650 solid;
+    border-radius: 10px 20px 10px 20px;
+    color:#E76650;
+    transition: all 1s ease-in-out;
+}
+.getPremiuim > ion-row > ion-col > div > ion-button:hover{
+    background-color: #E76650;
+    border: none;
+    color: white;
+    box-shadow: 5px 5px 10px #703126;
+}
+
+@media (prefers-color-scheme: dark) {
+    .getPremiuim{
+        background-image: url("/assets/background/mountainRedTinted.jpg");
+    }
+}
+@media (prefers-color-scheme:light){
+    .getPremiuim{
+        background-image: url("/assets/background/lightOffer.jpg");
+    }
+}
+
+

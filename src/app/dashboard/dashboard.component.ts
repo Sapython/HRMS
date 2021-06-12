@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DataProvider } from '../providers/data.provider';
 import { AuthService } from '../services/auth.service';
+import { UsersInfoService } from '../services/users-info.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,13 +10,14 @@ import { AuthService } from '../services/auth.service';
 })
 export class DashboardComponent implements OnInit {
   public appPages = [
-    { title: 'Dashboard', url: '/Dashboard/Home', icon: 'home' },
-    { title: 'Leave', url: '/Dashboard/Leave', icon: 'accessibility' },
-    { title: 'Biometrics', url: '/Dashboard/Biometrics', icon: 'finger-print' },
-    { title: 'Time Sheet', url: '/Dashboard/Timesheet', icon: 'archive' },
-    { title: 'Holiday Calendar', url: '/Dashboard/Calendar', icon: 'calendar' },
-    { title: 'Payroll', url: '/Dashboard/Payroll', icon: 'cash' },
-    { title: 'Settings', url: '/Dashboard/Settings', icon: 'cog' },
+    { title: 'Dashboard', url: '/Dashboard/Home', icon: 'home', accessLevel:0},
+    { title: 'Leave', url: '/Dashboard/Leave', icon: 'accessibility', accessLevel:1},
+    { title: 'Biometrics', url: '/Dashboard/Biometrics', icon: 'finger-print', accessLevel:1 },
+    { title: 'Time Sheet', url: '/Dashboard/Timesheet', icon: 'archive', accessLevel:0 },
+    { title: 'Holiday Calendar', url: '/Dashboard/Calendar', icon: 'calendar', accessLevel:0 },
+    { title: 'Payroll', url: '/Dashboard/Payroll', icon: 'cash', accessLevel:1 },
+    { title: 'Settings', url: '/Dashboard/Settings', icon: 'cog', accessLevel:1 },
+    { title: 'All Users', url: '/Dashboard/Users', icon:'people', accessLevel:2 }
   ];
   public labels = ['Family', 'Friends'];
 
@@ -32,7 +35,7 @@ export class DashboardComponent implements OnInit {
   ];
 
   searchResults = [];
-
+  userAccessLevel=-1;
   autocomplete() : void {
     this.searchResultsFound = false;
     this.noSearchResultFound = false;
@@ -53,9 +56,30 @@ export class DashboardComponent implements OnInit {
       }
     }
   }
+  
+  constructor(public authService:AuthService,public dataProvider:DataProvider,public usersInfoService:UsersInfoService) { 
+    this.dataProvider.showOverlay=true;
+    this.usersInfoService.getCurrentUserData().subscribe((value)=>{
+      this.userAccessLevel=-1;
+      this.dataProvider.accessLevel=-1;
+      console.log(value.access.accessLevel)
+      if (value.access.accessLevel=='Admin'){
+        this.userAccessLevel=2;
+        this.dataProvider.accessLevel=2;
+      }else if (value.access.accessLevel=="Manager"){
+        this.userAccessLevel=1;
+        this.dataProvider.accessLevel=1;
+      } else if (value.access.accessLevel=='Employee'){
+        this.userAccessLevel=0;
+        this.dataProvider.accessLevel=0;
+      }
+      console.log(this.userAccessLevel);
+      // this.userAccessLevel=;
+      this.dataProvider.showOverlay=false;
+    })
+  }
 
-  constructor(public authService:AuthService) { }
-
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

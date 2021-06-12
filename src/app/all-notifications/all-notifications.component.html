@@ -1,0 +1,127 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>All Messages</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid *ngIf="newNotifications.length>0 || readNotifications.length>0">
+    <ion-row>
+      <ion-col>
+        <ion-card *ngIf="newNotifications.length>0">
+          <ion-list>  
+            <ion-list-header>
+              <ion-label class="txt2 success">Latest</ion-label>  
+            </ion-list-header>
+            <ion-item class="text-10" *ngFor="let item of newNotifications">
+              <a class="uk-alert-close" (click)="removeItem(item.id)" uk-close></a>
+              <ion-avatar slot="start">
+                <img [src]="item.image" />
+              </ion-avatar>
+              <div>
+                <p id="title">{{item.title}}{{item.id}}</p>
+                <p id="text">{{item.text}}</p>
+                <ion-item>
+                  <ion-button color="success" (click)="openNotification(item.title,item.dateTime,item.text,item.tags)">Read More</ion-button>
+                  <ion-chip slot="end" color="{{tagged.color}}" outline="true" *ngFor="let tagged of item.tags">
+                    <ion-icon name="at-circle-outline"></ion-icon>
+                    <ion-label>{{tagged.title}}</ion-label>
+                  </ion-chip>
+                </ion-item>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+        <ion-card *ngIf="newNotifications.length<=0">
+          <div class="alignCenterH">
+            <ion-card-header>
+              <ion-card-subtitle>You are fully aware. You have no new notifications.</ion-card-subtitle>
+              <ion-card-title>No new notifications</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <img src="/assets/vectors/wellDone.png" class="emptyListImage" alt="Empty List">
+            </ion-card-content>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="readNotifications.length>=1">
+      <ion-col>
+        <ion-card>
+          <ion-list>  
+            <ion-list-header>  
+              <ion-label class="txt2 warning">Old</ion-label>  
+            </ion-list-header>  
+            <ion-item class="text-10" *ngFor="let item of readNotifications">
+              <ion-avatar slot="start">
+                <img [src]="item.image" />
+              </ion-avatar>
+              <div>
+                <p id="title">{{item.title}}{{item.id}}</p>
+                <p id="text">{{item.text}}</p>
+                <ion-item>
+                  <ion-button color="warning" (click)="openNotification(item.title,item.dateTime,item.text,item.tags)">Read More</ion-button>
+                  <ion-chip slot="end" color="{{tagged.color}}" outline="true" *ngFor="let tagged of item.tags">
+                    <ion-icon name="at-circle-outline"></ion-icon>
+                    <ion-label>{{tagged.title}}</ion-label>
+                  </ion-chip>
+                </ion-item>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card class="noActivity" *ngIf="newNotifications.length==0 && readNotifications.length==0">
+    <p class="txt2 primary">No activity here.</p>
+    <img src="/assets/vectors/empty.png" alt="">
+  </ion-card>
+  <ion-card class="quickButtons" *ngIf="newNotifications.length==0 && readNotifications.length==0">
+    <div>
+      <ion-button fill="clear" color="primary" href="./Dashboard/Home">
+        <ion-icon color="primary" name="home"></ion-icon>
+        &nbsp;&nbsp;Back To Home
+      </ion-button>
+      <ion-button fill="clear" color="tertiary" href="./Dashboard/Home">
+        <ion-icon color="tertiary" name="finger-print"></ion-icon>
+        &nbsp;&nbsp;Back To Biometrics
+      </ion-button>
+      <ion-button fill="clear" color="danger" href="./Dashboard/Home">
+        <ion-icon color="danger" name="bug"></ion-icon>
+        &nbsp;&nbsp;Facing an issue. Read FAQs.
+      </ion-button>
+      <ion-button fill="clear" color="success" href="./Dashboard/Home">
+        <ion-icon color="success" name="accessibility"></ion-icon>
+        &nbsp;&nbsp;Contact Help
+      </ion-button>
+    </div>
+  </ion-card>
+</ion-content>
+<ion-card id="hiddenInfoCard">
+  <ion-button (click)="closeNotification()" expand="full" fill="clear">
+    <ion-icon name="close"></ion-icon>
+    &nbsp;&nbsp;Close Panel
+  </ion-button>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{selectedNotificationSubtitle}}</ion-card-subtitle>
+      <ion-card-title>{{selectedNotificationTitle}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{selectedNotificationBody}}
+      <br>
+      <ion-chip slot="end" color="{{tagged.color}}" outline="true" *ngFor="let tagged of selectedNotificationTags">
+        <ion-icon color="{{tagged.color}}" name="at-circle-outline"></ion-icon>
+        <ion-label color="{{tagged.color}}">{{tagged.title}}</ion-label>
+      </ion-chip>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let tagged of selectedNotificationTags">
+    <!-- <ion-list *ngFor="let member of team(tagged.title)">
+      //TODO : 
+    </ion-list> -->
+  </ion-card>
+</ion-card>

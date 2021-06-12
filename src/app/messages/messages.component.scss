@@ -1,6 +1,6 @@
 ion-list{
     --width:400px;
-    height:500px;
+    height:auto;
     overflow-y: auto;
 }
 #title{
@@ -12,3 +12,13 @@ ion-list{
 img{
     vertical-align: middle;
 }
+ion-card{
+    overflow-y: auto;
+    max-height: 500px;
+    padding: 0% !important;
+    margin: 0% !important;
+}
+ion-list-header{
+    position: fixed;
+}
+

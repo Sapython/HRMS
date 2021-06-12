@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-card>
+  <ion-card [ngStyle]="{'filter': (dataProvider.showOverlay) ? 'blur(10px)' : 'blur(0px)' }">
     <ion-label><h1 class="uk-text-center">Signup Now</h1></ion-label>
       <ion-avatar *ngIf="img1" class="uk-align-center">
         <img [src]="img1" >
@@ -62,4 +62,7 @@
     </ion-button>
     <a href="/Login" class="uk-text-center uk-align-center"><ion-label color="primary">If you already have account login now.</ion-label></a>
   </ion-card>
+  <div id="overlay" *ngIf="dataProvider.showOverlay">
+    <ion-spinner name="crescent" color="tertiary"></ion-spinner>
+  </div>
 </ion-content>

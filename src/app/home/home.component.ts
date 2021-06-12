@@ -4,6 +4,7 @@ import { MessagesComponent } from '../messages/messages.component';
 import { NotificationComponent } from '../notification/notification.component';
 import { ChartDataSets, ChartLegendLabelOptions, ChartLegendOptions, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { DataProvider } from '../providers/data.provider';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +14,20 @@ import { Color, Label } from 'ng2-charts';
 export class HomeComponent implements OnInit,AfterViewInit {
   @ViewChild('timingChart') canvas:ElementRef;
   ngAfterViewInit(){
+    const dayProgress=document.getElementById("dayProgress") as HTMLInputElement;
+    let date = new Date()
+    dayProgress.value=(((((date.getHours()-9)*60)+date.getMinutes())/54000)*100).toString()
+    console.log(dayProgress.value,((date.getHours()-9)*60))
+    setInterval(function(){
+      let date = new Date()
+      dayProgress.value=(((((date.getHours()-9)*60)+date.getMinutes())/54000)*100).toString()
+      console.log(dayProgress.value,((date.getHours()-9)*60))
+    },60000)
     console.log("Alpha: ",this.canvas)
     if (this.canvas){
       const gradient = this.canvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 150);
-      gradient.addColorStop(0, 'rgba(52, 213, 235,1)');
-      gradient.addColorStop(1, 'rgba(52, 213, 235,0.0)');
+      gradient.addColorStop(0, 'rgba(255, 118, 87,1)');
+      gradient.addColorStop(1, 'rgba(255, 89, 139,0.7)');
       this.lineChartColors = [
           {
               backgroundColor: gradient
@@ -27,6 +37,32 @@ export class HomeComponent implements OnInit,AfterViewInit {
       console.log("ALpha: ",this.canvas);
     }
   }
+  totalWorkingDays:number=0;
+  totalCompleteDays:number=0;
+  getWorkingDays(){
+    const holidays = [
+      [7, 4], // 4th of July
+      [10, 31] // Halloween
+    ];
+    
+    var d = new Date();
+    var currentDay = d.getDate();
+    var year = d.getFullYear();
+    var month = d.getMonth();
+    var total = 0;
+    var done = 0;
+    for (var day = 1; day <= 31; day++) {
+      var t = new Date(year, month, day);
+      if (t.getMonth() > month) break; // month has less than 31 days
+      if (t.getDay() == 0 || t.getDay() == 6) continue; // no weekday
+      if (holidays.some(h => h[0] - 1 === month && h[1] === day)) continue; // holiday
+      total++; // increase total
+      if (t.getDate() <= currentDay) done++; // increase past days
+    }
+    // document.body.innerHTML = `Today is weekday ${done} of ${total}.`
+    this.totalWorkingDays=total;
+    this.totalCompleteDays=done;
+  }
   date: Date = new Date();
   public lineChartData: ChartDataSets[] = [
     { data: [9, 10, 10, 11, 12, 9, 10], label: 'Timings' },
@@ -34,9 +70,8 @@ export class HomeComponent implements OnInit,AfterViewInit {
   public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartColors: Color[] = [
     {
-      borderColor: "#80b6f4",
-      pointBorderColor: "#80b6f4",
-      // pointBackgroundColor: "#80b6f4",
+      borderColor: "rgb(255, 200, 200)",
+      pointBorderColor: "rgb(255, 255, 255)",
       pointHoverBackgroundColor: "#80b6f4",
       pointHoverBorderColor: "#80b6f4",
       pointBorderWidth: 10,
@@ -103,7 +138,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
     },
   ];
   interviews=[];
-  constructor(public popoverController: PopoverController) { }
+  constructor(public popoverController: PopoverController, public dataProvider:DataProvider) { }
   daysInletters=['S','M','Tu','W','Th','F','Sa'];
   days=[];
 
@@ -130,17 +165,10 @@ export class HomeComponent implements OnInit,AfterViewInit {
     return await popover.present();
   }
   ngOnInit() {
+    // this.dataProvider.showOverlay=true;
+    this.getWorkingDays();
     this.interviews=this.interviewsMainData;
     // (document.getElementById("notificationButton") as HTMLElement).addEventListener('click',this.notifications);
-    const dayProgress=document.getElementById("dayProgress") as HTMLInputElement;
-    let date = new Date()
-    dayProgress.value=(((((date.getHours()-9)*60)+date.getMinutes())/54000)*100).toString()
-    console.log(dayProgress.value,((date.getHours()-9)*60))
-    setInterval(function(){
-      let date = new Date()
-      dayProgress.value=(((((date.getHours()-9)*60)+date.getMinutes())/54000)*100).toString()
-      console.log(dayProgress.value,((date.getHours()-9)*60))
-    },60000)
     for (let i=0; i<=8; i++){
       let isTrue=false;
       if (this.date.getDay()==i){

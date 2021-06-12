@@ -49,6 +49,24 @@ export class HolidayCalendarComponent implements OnInit {
     for (let day = 1; day <= monthDays; day++) {
       cells[index].classList.add('day');
       cells[index++].textContent = day.toString();
+      
+      // Added by saptam
+      let checkDate = new Date()
+      cells[index].style.color=""
+      cells[index].style.borderRadius="";
+      cells[index].style.border=""
+      cells[index].style.fontSize="";
+      cells[index].style.background=""
+      // console.log(checkDate,this.year,checkDate.getFullYear(),this.monthNo,checkDate.getMonth(),day,checkDate.getDate()-1);
+      // console.log(this.monthNo==checkDate.getMonth(),this.year==checkDate.getFullYear(),day==checkDate.getDate()-1)
+      if ((this.monthNo==checkDate.getMonth()) && (this.year==checkDate.getFullYear()) && (day==checkDate.getDate()-1)){
+        cells[index].style.color="var(--ion-color-primary)";
+        cells[index].style.fontSize="larger";
+        cells[index].style.borderRadius="30px";
+        cells[index].style.border="2px solid var(--ion-color-primary)"
+        cells[index].style.background="rgba(66, 140, 255,0.3)"
+      }
+      // Added by saptam
     }
 
     //  Marking today's date

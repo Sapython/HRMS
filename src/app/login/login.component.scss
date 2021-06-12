@@ -36,5 +36,34 @@ ion-button{
     }
     
 }
-
-
+#overlay{
+    // display: none;
+    position: absolute;
+    top:0%;
+    left:0%;
+    width: 100vw;
+    height:100vh;
+    overflow: hidden;
+    z-index: 1;
+}
+#overlay > *{
+    position: relative;
+    top:50%;
+    left:50%;
+    width: 100px;
+    height:100px;
+    transform: translate(-50%,-50%);
+}
+@media (prefers-color-scheme:dark){
+    #overlay{
+        background-color: #07172cbd;
+    }
+}
+@media (prefers-color-scheme:light){
+    #overlay{
+        background-color: #bd4f6c9a;
+    }
+}
+// ion-card{
+//     filter: blur(10px);
+// }

@@ -14,6 +14,8 @@ import { TimeSheetComponent } from './time-sheet/time-sheet.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { LoginGuard } from './guards/login-guard.guard'
+import { UsersComponent } from './users/users.component';
+import { AllNotificationsComponent } from './all-notifications/all-notifications.component';
 const routes: Routes = [
   {
     path: '',
@@ -53,6 +55,14 @@ const routes: Routes = [
         path: 'Settings',
         component:SettingsComponent,
       },
+      {
+        path:'Users',
+        component:UsersComponent,
+      },
+      {
+        path:"Notifications",
+        component:AllNotificationsComponent,
+      }
     ]
   },
   {
@@ -66,11 +76,11 @@ const routes: Routes = [
   {
     path:"verifyEmail",
     component:VerifyEmailComponent,
-  },  {
+  },
+  {
     path: 'add-reminder-or-event',
     loadChildren: () => import('./modals/add-reminder-or-event/add-reminder-or-event.module').then( m => m.AddReminderOrEventPageModule)
   },
-
 ];
 
 @NgModule({
