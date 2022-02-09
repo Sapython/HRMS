@@ -47,6 +47,18 @@ td{
 .uk-table{
     transition: all 1s ease-in-out;
 }
+#hiddenInfoCard{
+    --background: var(--ion-color-light-shade);
+    position:absolute;
+    top:0px;
+    right:-60vw;
+    width:50vw;
+    z-index:500;
+    height:100vh;
+    overflow: hidden;
+    transition: all 1s ease-in-out;
+}
+
 
 
 

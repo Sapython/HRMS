@@ -4,7 +4,7 @@
       <ion-content>
         <ion-list id="inbox-list">
           <ion-avatar>
-            <img [src]="authService.getUserPhoto()" alt="User">
+            <img [src]="authService.getUserPhoto()" referrerpolicy="no-referrer" alt="User">
           </ion-avatar>
           <ion-list-header>{{authService.getUserName()}}&nbsp;&nbsp;<ion-chip color="danger" outline>Live</ion-chip></ion-list-header>
           <ion-note>{{authService.getUserEmail()}}</ion-note>
@@ -44,9 +44,9 @@
             <ion-label>{{ label }}</ion-label>
           </ion-item>
         </ion-list>
-        <ion-item>
-          <ion-button (click)="authService.SignOut()" color="danger">Log Out</ion-button>
-        </ion-item>
+        <div class="uk-width-1-1">
+          <ion-button (click)="authService.SignOut()" class="uk-width-1-1 logout">Log Out</ion-button>
+        </div>
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

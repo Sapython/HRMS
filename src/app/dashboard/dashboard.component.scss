@@ -161,6 +161,13 @@ ion-searchbar{
   height:100px;
   transform: translate(-50%,-50%);
 }
+.logout{
+  --border-radius: 20px;
+  border-radius: 20px;
+  border:2px rgb(255, 87, 109) solid;
+  --background: rgba(255, 87, 109,0.3);
+  color:rgb(255, 87, 109);
+}
 @media (prefers-color-scheme:dark){
   #overlay{
       background-color: #07172cbd;

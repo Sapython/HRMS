@@ -30,7 +30,6 @@ export class NotificationComponent implements OnInit {
     
   ]
   constructor() { }
-
   ngOnInit() {}
 
 }

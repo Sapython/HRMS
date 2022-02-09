@@ -149,11 +149,6 @@ export class AllNotificationsComponent implements OnInit {
     this.selectedNotificationSubtitle=date
     this.selectedNotificationBody=body
     this.selectedNotificationTags=tags;
-    console.log(this.selectedNotificationTitle)
-    console.log(this.selectedNotificationBody)
-    console.log(this.selectedNotificationSubtitle)
-    console.log(this.selectedNotificationTags)
-
   }
   closeNotification(){
     var card = document.getElementById("hiddenInfoCard") as HTMLElement;

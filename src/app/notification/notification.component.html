@@ -2,12 +2,14 @@
   <ion-list-header>  
     <ion-label>Notifications</ion-label>  
   </ion-list-header>  
-  <ion-item class="text-10" *ngFor="let item of notifications">
-    <ion-icon name="alert-circle-outline" color="danger" *ngIf="item.type=='Alert'"></ion-icon>
-    <ion-icon name="warning-outline" color="warning" *ngIf="item.type=='Warning'"></ion-icon>
-    <ion-icon name="information-circle-outline" color="primary" *ngIf="item.type=='Info'"></ion-icon>
-    <ion-icon name="checkmark-done-outline" color="success" *ngIf="item.type=='Success'"></ion-icon>
-    <ion-label id="title">{{item.title}}</ion-label>
-    <ion-label id="text">{{item.text}}</ion-label>
-  </ion-item>  
+  <div *ngFor="let item of notifications">
+      <ion-item href="./Dashboard/Timesheet">
+        <ion-icon name="alert-circle-outline" color="danger" *ngIf="item.type=='Alert'"></ion-icon>
+        <ion-icon name="warning-outline" color="warning" *ngIf="item.type=='Warning'"></ion-icon>
+        <ion-icon name="information-circle-outline" color="primary" *ngIf="item.type=='Info'"></ion-icon>
+        <ion-icon name="checkmark-done-outline" color="success" *ngIf="item.type=='Success'"></ion-icon>
+        <ion-label id="title">{{item.title}}</ion-label>
+        <ion-label id="text">{{item.text}}</ion-label>
+      </ion-item>
+  </div>
 </ion-list>  

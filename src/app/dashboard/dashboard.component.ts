@@ -59,6 +59,7 @@ export class DashboardComponent implements OnInit {
   
   constructor(public authService:AuthService,public dataProvider:DataProvider,public usersInfoService:UsersInfoService) { 
     this.dataProvider.showOverlay=true;
+    console.log(this.authService.userId);
     this.usersInfoService.getCurrentUserData().subscribe((value)=>{
       this.userAccessLevel=-1;
       this.dataProvider.accessLevel=-1;
@@ -78,7 +79,14 @@ export class DashboardComponent implements OnInit {
       this.dataProvider.showOverlay=false;
     })
   }
-
+  openNotification(title,date,body,tags){
+    var card = document.getElementById("hiddenInfoCard") as HTMLElement;
+    card.style.right="-10px";
+  }
+  closeNotification(){
+    var card = document.getElementById("hiddenInfoCard") as HTMLElement;
+    card.style.right="-60vw";
+  }
   ngOnInit() {
   }
 

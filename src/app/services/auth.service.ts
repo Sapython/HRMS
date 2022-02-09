@@ -207,7 +207,7 @@ export class AuthService {
       this.SetUserData(result.user);
       // window.alert("Auhtorisation successful ");
       this.presentToast("Auhtorisation Successful")
-      this.router.navigate[""]
+      this.router.navigateByUrl('')
     }).catch((error:any) => {
       this.presentToast(error);
     })
@@ -238,6 +238,9 @@ export class AuthService {
         photoURL: photo,
         emailVerified: user.emailVerified,
         isAdmin:false,
+        leaveTaken:0,
+        totalProjects:0,
+        completedProjects:0,
         firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
         data:user.data || [],
         post:"Unregistered",
@@ -253,6 +256,9 @@ export class AuthService {
         photoURL: user.photoURL,
         emailVerified: user.emailVerified,
         isAdmin:false,
+        totalProjects:0,
+        completedProjects:0,
+        leaveTaken:0,
         firstLogin:today.toLocaleDateString("en-US",AuthService.dateOptions).toString(),
         data:user.data || [],
         post:"Unregistered",
